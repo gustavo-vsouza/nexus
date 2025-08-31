@@ -1,13 +1,15 @@
 from fastapi import FastAPI
-from routes import *
-from database.connection import Base, engine
+from app.database.connection import Base, engine
 
-app = FastAPI(title="Zentavos API")
+from app.models.usuarios import Usuario
+from app.models.contas import Conta
+from app.models.categorias import Categoria
+from app.models.transacoes import Transacao
 
-# Criar tabelas automaticamente
+app = FastAPI()
+
 Base.metadata.create_all(bind=engine)
 
-
 @app.get("/")
-def root():
-    return {"message": "Bem-vindo ao backend do Zentavos 🚀"}
+def read_root():
+    return {"message": "API Zentavos rodando 🚀"}
