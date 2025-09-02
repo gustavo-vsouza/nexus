@@ -1,56 +1,45 @@
 from sqlalchemy.orm import Session
-from app.models.transacoes import Transacao
+from app.models.usuarios import Usuario
 
-# CREATE - cria uma nova transação no banco
-def criar_transacao(db: Session, conta_id: int, valor: int, tipo: str,
-                    descricao: str = None, categoria_id: int = None):
-    transacao = Transacao(
-        conta_id=conta_id,
-        categoria_id=categoria_id,
-        valor=valor,
-        descricao=descricao,
-        tipo=tipo
-    )  # cria o objeto da transação
-    db.add(transacao)  # adiciona à sessão
-    db.commit()  # confirma no banco
-    db.refresh(transacao)  # atualiza com dados do banco (ex: id gerado)
-    return transacao
-
-# READ - lista todas as transações
-def listar_transacoes(db: Session):
-    return db.query(Transacao).all()
-
-# READ - busca uma transação por id
-def listar_transacao_por_id(db: Session, transacao_id: int):
-    return db.query(Transacao).filter(Transacao.id == transacao_id).first()
-
-# UPDATE - atualiza os dados de uma transação
-def atualizar_transacao(db: Session, transacao_id: int, conta_id: int = None,
-                        valor: int = None, tipo: str = None,
-                        descricao: str = None, categoria_id: int = None):
-    transacao = db.query(Transacao).filter(Transacao.id == transacao_id).first()
-    if not transacao:
-        return None
-    # só atualiza os campos enviados
-    if conta_id is not None:
-        transacao.conta_id = conta_id
-    if valor is not None:
-        transacao.valor = valor
-    if tipo is not None:
-        transacao.tipo = tipo
-    if descricao is not None:
-        transacao.descricao = descricao
-    if categoria_id is not None:
-        transacao.categoria_id = categoria_id
+# CREATE
+def criar_usuario(db: Session, nome: str, email: str, senha_hash: str, status: str = "ativo"):
+    usuario = Usuario(nome=nome, email=email, senha_hash=senha_hash, status=status)
+    db.add(usuario)
     db.commit()
-    db.refresh(transacao)  # pega os dados atualizados
-    return transacao
+    db.refresh(usuario)
+    return usuario
 
-# DELETE - remove de vez a transação do banco
-def deletar_transacao(db: Session, transacao_id: int):
-    transacao = db.query(Transacao).filter(Transacao.id == transacao_id).first()
-    if not transacao:
+# READ
+def listar_usuarios(db: Session):
+    return db.query(Usuario).all()
+
+def listar_usuario_por_id(db: Session, usuario_id: int):
+    return db.query(Usuario).filter(Usuario.id == usuario_id).first()
+
+# UPDATE
+def atualizar_usuario(db: Session, usuario_id: int, nome: str = None, email: str = None,
+                      senha_hash: str = None, status: str = None):
+    usuario = db.query(Usuario).filter(Usuario.id == usuario_id).first()
+    if not usuario:
         return None
-    db.delete(transacao)  # deleta de verdade (não soft delete)
+    if nome is not None:
+        usuario.nome = nome
+    if email is not None:
+        usuario.email = email
+    if senha_hash is not None:
+        usuario.senha_hash = senha_hash
+    if status is not None:
+        usuario.status = status
     db.commit()
-    return transacao
+    db.refresh(usuario)
+    return usuario
+
+# DELETE (soft delete -> muda status)
+def deletar_usuario(db: Session, usuario_id: int):
+    usuario = db.query(Usuario).filter(Usuario.id == usuario_id).first()
+    if not usuario:
+        return None
+    usuario.status = "inativo"
+    db.commit()
+    db.refresh(usuario)
+    return usuario
