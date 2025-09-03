@@ -10,9 +10,9 @@
     </div>
 
     <!-- Coluna Direita -->
-    <div class="flex flex-col items-center justify-center px-6 py-10 bg-gray-50">
+    <div class="flex flex-col items-center justify-center px-6 py-10 bg-primary-dark">
       <!-- Logo -->
-      <img src="https://cdn-icons-png.flaticon.com/512/189/189715.png" alt="Icone" class="w-14 mb-4" />
+      <img src="../../assets/img/LogoZentavos.png" alt="Icone" class="w-14 mb-4" />
 
       <!-- Título -->
       <h1 class="font-bold text-blue-800 text-3xl md:text-4xl text-center" style="font-family: 'Poppins', sans-serif;">
