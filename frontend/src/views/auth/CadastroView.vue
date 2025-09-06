@@ -1,36 +1,17 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-2 h-screen">
     <!-- Coluna Esquerda -->
-    <div class="bg-primary-light text-white flex-col justify-center items-center p-10 text-center hidden md:flex">
-      <img src="../../assets/img/CasalFinanceiro3.png" class="w-[20em] md:w-[28em] lg:w-[35em] mb-6" alt="Imagem 1" />
-      <h2 class="text-2xl font-semibold">Olá, meu amigo!</h2>
-      <p class="mt-2 text-gray-200 max-w-md">
-        Organize suas finanças de um jeito simples e sem dor de cabeça.
-      </p>
-    </div>
-
-    <!-- Coluna Direita -->
-    <div class="flex flex-col items-center justify-center px-6 py-8 bg-white">
+    <div class="flex flex-col items-center justify-center px-6 py-5 bg-white">
       <!-- Logo -->
       <img src="../../assets/img/LogoZentavos.png" alt="Icone" class="w-14 mb-4" />
 
-      <!-- Título -->
-      <h1 class="font-bold text-primary-light text-3xl md:text-4xl text-center" style="font-family: 'Poppins', sans-serif;">
-        Seja bem-vindo ao Zentavos!
-      </h1>
-      <p class="text-gray-600 text-center my-4 max-w-sm">
-        Entre no Zentavos e organize o bolso sem perder a paz!
-      </p>
-
       <!-- Inputs -->
       <div class="w-full max-w-sm space-y-4">
+        <InputComponent v-model="nome" tipo="text" label="Nome" icon="badge" required/>
         <InputComponent v-model="email" tipo="email" label="E-mail" icon="mail" required/>
-
         <div class="w-full">
           <InputComponent v-model="senha" tipo="password" label="Senha" icon="password" required />
-          <p class="text-xs text-primary-light cursor-pointer hover:underline mt-1 text-left">
-            Esqueci minha senha
-          </p>
+          <InputComponent v-model="confirmarSenha" tipo="password" label="Confirmar senha" icon="password" class="mt-4" required />
         </div>
       </div>
 
@@ -38,8 +19,8 @@
       <div class="w-full max-w-sm mt-6 space-y-3">
         <button
           class="cursor-pointer w-full py-2 bg-primary-light text-white font-semibold rounded-lg shadow-md hover:bg-primary transition"
-          @click="login()">
-          Entrar
+          @click="cadastrar()">
+          Cadastrar-se
         </button>
 
         <button
@@ -64,11 +45,23 @@
 
       <!-- Link Cadastro -->
       <p class="mt-6 text-sm text-gray-700">
-        Ainda não tem uma conta?
-        <RouterLink to="/cadastro" class="text-primary-light font-medium hover:underline">Cadastrar-se</RouterLink>
+        Já possui uma conta?
+        <RouterLink to="/" class="text-primary-light font-medium hover:underline">Login</RouterLink>
+      </p>
+    </div>
+
+    
+    <!-- Coluna Esquerda -->
+    <div class="bg-primary-light text-white flex-col justify-center items-center p-10 text-center hidden md:flex">
+      <img src="../../assets/img/CasalFinanceiro2.png" class="w-[20em] md:w-[28em] lg:w-[35em] mb-6" alt="Imagem 1" />
+      <h2 class="text-2xl font-semibold">Olá, meu amigo!</h2>
+      <p class="mt-2 text-gray-200 max-w-md">
+        Organize suas finanças de um jeito simples e sem dor de cabeça.
       </p>
     </div>
   </div>
+
+  
 </template>
 
 <script setup lang="ts">
@@ -76,14 +69,24 @@ import { RouterLink } from 'vue-router'
 import InputComponent from '../../components/InputComponent.vue';
 import { ref } from 'vue'
 
+const nome = ref('')
 const email = ref('')
 const senha = ref('')
+const confirmarSenha = ref('')
 
-function login() {
-  if (email.value && senha.value) {
-    alert(`E-mail: ${email.value}\nSenha: ${senha.value}`)
+function cadastrar() {
+  if (email.value && senha.value && confirmarSenha.value && nome.value ) {
+    if(senha.value === confirmarSenha.value){
+      alert("Belezinha irmão! Tu criou tua continha")
+      nome.value = ""
+      email.value = ""
+      senha.value = ""
+      confirmarSenha.value = ""
+    } else {
+      alert("SENHA DIFERENTE CARALHO")
+    }
   } else {
-    console.error('Por favor, preencha todos os campos.')
+    alert('Por favor, preencha todos os campos.')
   }
 }
 </script>

@@ -9,10 +9,10 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#14E2A4", // cor principal da logo
-          light: "#5CF5C4",   // variação clara
-          dark: "#0FA37A",    // variação escura
-          bg: "#002B29",      // fundo da logo
+          DEFAULT: "#005B41", // cor principal da logo
+          light: "#008170",   // variação clara
+          dark: "#232D3F",    // variação escura
+          bg: "#0F0F0F",      // fundo da logo
         },
       },
     },
