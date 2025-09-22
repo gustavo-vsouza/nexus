@@ -17,6 +17,7 @@ export interface UsuarioCreate {
 
 // Criar usuário
 export const criarUsuario = async (dados: UsuarioCreate) => {
+  console.log(dados)
   const response = await api.post<Usuario>("/usuarios/", dados);
   return response.data;
 };

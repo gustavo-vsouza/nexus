@@ -58,8 +58,8 @@ app/
 
 1. **Clone o repositório**
    ```bash
-   git clone https://github.com/gustavo-vsouza/zentavos.git
-   cd zentavos
+   git clone https://github.com/gustavo-vsouza/nexus.git
+   cd nexus
    ```
 
 2. **Crie e ative o ambiente virtual**

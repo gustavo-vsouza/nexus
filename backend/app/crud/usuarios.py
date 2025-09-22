@@ -1,13 +1,20 @@
 from sqlalchemy.orm import Session
 from app.models.usuarios import Usuario
+from app.utils.security import hash_password
 
 # CREATE
-def criar_usuario(db: Session, nome: str, email: str, senha_hash: str, status: str = "ativo"):
-    usuario = Usuario(nome=nome, email=email, senha_hash=senha_hash, status=status)
-    db.add(usuario)
+def criar_usuario(db: Session, nome: str, email: str, senha: str, status: bool = True):
+    senha_hash = hash_password(senha)  # 🔑 faz o hash antes de salvar
+    db_usuario = Usuario(
+        nome=nome,
+        email=email,
+        senha_hash=senha_hash,
+        status=status
+    )
+    db.add(db_usuario)
     db.commit()
-    db.refresh(usuario)
-    return usuario
+    db.refresh(db_usuario)
+    return db_usuario
 
 # READ
 def listar_usuarios(db: Session):

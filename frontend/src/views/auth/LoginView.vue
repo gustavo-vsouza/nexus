@@ -1,30 +1,30 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-2 h-screen">
     <!-- Coluna Esquerda -->
-    <div class="bg-primary-light text-white flex-col justify-center items-center p-10 text-center hidden md:flex">
+    <div class="bg-primary-second text-white flex-col justify-center items-center p-10 text-center hidden md:flex">
       <img src="../../assets/img/CasalFinanceiro3.png" class="w-[20em] md:w-[28em] lg:w-[35em] mb-6" alt="Imagem 1" />
-      <h2 class="text-2xl font-semibold">Olá, meu amigo!</h2>
-      <p class="mt-2 text-gray-200 max-w-md">
+      <p class="mt-2 text-neutral-white max-w-md">
         Organize suas finanças de um jeito simples e sem dor de cabeça.
       </p>
     </div>
 
     <!-- Coluna Direita -->
-    <div class="flex flex-col items-center justify-center px-6 py-8 bg-white">
+    <div class="flex flex-col items-center justify-center px-6 py-8 bg-primary-second">
       <!-- Logo -->
-      <img src="../../assets/img/LogoZentavos.png" alt="Icone" class="w-14 mb-4" />
+      <img src="../../assets/img/LogoNexus.png" alt="Icone" class="w-14 mb-4" />
 
       <!-- Título -->
-      <h1 class="font-bold text-primary-light text-3xl md:text-4xl text-center" style="font-family: 'Poppins', sans-serif;">
-        Seja bem-vindo ao Zentavos!
+      <h1 class="font-bold text-primary-light text-3xl md:text-4xl text-center"
+        style="font-family: 'Poppins', sans-serif;">
+        Seja bem-vindo ao Nexus!
       </h1>
-      <p class="text-gray-600 text-center my-4 max-w-sm">
-        Entre no Zentavos e organize o bolso sem perder a paz!
+      <p class="text-neutral-gray text-center my-4 max-w-sm">
+        Entre no Nexus e organize o bolso sem perder a paz!
       </p>
 
       <!-- Inputs -->
       <div class="w-full max-w-sm space-y-4">
-        <InputComponent v-model="email" tipo="email" label="E-mail" icon="mail" required/>
+        <InputComponent v-model="email" tipo="email" label="E-mail" icon="mail" required />
 
         <div class="w-full">
           <InputComponent v-model="senha" tipo="password" label="Senha" icon="password" required />
@@ -63,7 +63,7 @@
       </div>
 
       <!-- Link Cadastro -->
-      <p class="mt-6 text-sm text-gray-700">
+      <p class="mt-6 text-sm text-neutral-white">
         Ainda não tem uma conta?
         <RouterLink to="/cadastro" class="text-primary-light font-medium hover:underline">Cadastrar-se</RouterLink>
       </p>

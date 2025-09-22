@@ -1,17 +1,22 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-2 h-screen">
     <!-- Coluna Esquerda -->
-    <div class="flex flex-col items-center justify-center px-6 py-5 bg-white">
+    <div class="flex flex-col items-center justify-center px-6 py-5 bg-primary-second">
       <!-- Logo -->
-      <img src="../../assets/img/LogoZentavos.png" alt="Icone" class="w-14 mb-4" />
+      <img src="../../assets/img/LogoNexus.png" alt="Icone" class="w-14 mb-4" />
 
       <!-- Inputs -->
       <div class="w-full max-w-sm space-y-4">
-        <InputComponent v-model="nome" tipo="text" label="Nome" icon="badge" required/>
-        <InputComponent v-model="email" tipo="email" label="E-mail" icon="mail" required/>
+        <InputComponent v-model="nome" tipo="text" label="Nome Completo" icon="badge" required />
+        <p v-if="faltaNome"></p>
+        <InputComponent v-model="email" tipo="email" label="E-mail" icon="mail" required />
+        <p v-if="faltaEmail"></p>
         <div class="w-full">
           <InputComponent v-model="senha" tipo="password" label="Senha" icon="password" required />
-          <InputComponent v-model="confirmarSenha" tipo="password" label="Confirmar senha" icon="password" class="mt-4" required />
+          <p v-if="faltaSenha"></p>
+          <InputComponent v-model="confirmarSenha" tipo="password" label="Confirmar senha" icon="password" class="mt-4"
+            required />
+          <p v-if="faltaConfirmarSenha"></p>
         </div>
       </div>
 
@@ -50,7 +55,7 @@
       </p>
     </div>
 
-    
+
     <!-- Coluna Esquerda -->
     <div class="bg-primary-light text-white flex-col justify-center items-center p-10 text-center hidden md:flex">
       <img src="../../assets/img/CasalFinanceiro2.png" class="w-[20em] md:w-[28em] lg:w-[35em] mb-6" alt="Imagem 1" />
@@ -61,32 +66,47 @@
     </div>
   </div>
 
-  
+
 </template>
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { criarUsuario } from "@/services/usuarios";
 import InputComponent from '../../components/InputComponent.vue';
 import { ref } from 'vue'
 
 const nome = ref('')
+const faltaNome = ref(false)
+const faltaEmail = ref(false)
+const faltaSenha = ref(false)
+const faltaConfirmarSenha = ref(false)
+const senhaIncoerente = ref(false)
 const email = ref('')
 const senha = ref('')
 const confirmarSenha = ref('')
 
-function cadastrar() {
-  if (email.value && senha.value && confirmarSenha.value && nome.value ) {
-    if(senha.value === confirmarSenha.value){
-      alert("Belezinha irmão! Tu criou tua continha")
-      nome.value = ""
-      email.value = ""
-      senha.value = ""
-      confirmarSenha.value = ""
-    } else {
-      alert("SENHA DIFERENTE CARALHO")
-    }
+const cadastrar = async () => {
+  if (!nome.value) {
+    faltaNome.value = true
+  } else if (!email.value) {
+    faltaEmail.value = true
+  } else if (!senha.value) {
+    faltaSenha.value = true
+  } else if (!confirmarSenha.value) {
+    faltaConfirmarSenha.value = true
+  } else if (senha.value != confirmarSenha.value) {
+    senhaIncoerente.value = true
   } else {
-    alert('Por favor, preencha todos os campos.')
+    try {
+      const usuario = await criarUsuario({
+        nome: nome.value,
+        email: email.value,
+        senha_hash: senha.value,
+      });
+      console.log(usuario);
+    } catch (error: any) {
+      console.error = error.response?.data?.detail || "Erro ao registrar usuário";
+    }
   }
-}
+};
 </script>

@@ -8,7 +8,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 # Cria a aplicação FastAPI
-app = FastAPI(title="Zentavos API")
+app = FastAPI(title="Nexus API")
 
 # Configuração de CORS
 origins = [

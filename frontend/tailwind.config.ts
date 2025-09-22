@@ -9,10 +9,16 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#005B41", // cor principal da logo
-          light: "#008170",   // variação clara
-          dark: "#232D3F",    // variação escura
-          bg: "#0F0F0F",      // fundo da logo
+          DEFAULT: "#00FFB2", // verde neon (principal)
+          light: "#00C2FF",   // azul neon (variação)
+          dark: "#A020F0",    // roxo neon (variação)
+          accent: "#FF2E92",  // rosa neon (destaque)
+          bg: "#06022D",      // fundo principal
+          second: "#0D0D2B",   // fundo secundário
+        },
+        neutral: {
+          white: "#f0f0f0",
+          gray: "#D1D5DB",
         },
       },
     },
