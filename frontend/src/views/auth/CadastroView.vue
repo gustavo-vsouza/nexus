@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-2 h-screen">
     <!-- Coluna Esquerda -->
-    <div class="flex flex-col items-center justify-center px-6 py-5 bg-primary-second">
+    <div class="flex flex-col items-center justify-center px-6 py-5 bg-neutral-white">
       <!-- Logo -->
       <img src="../../assets/img/LogoNexus.png" alt="Icone" class="w-14 mb-4" />
 
@@ -23,7 +23,7 @@
       <!-- Botões -->
       <div class="w-full max-w-sm mt-6 space-y-3">
         <button
-          class="cursor-pointer w-full py-2 bg-primary-light text-white font-semibold rounded-lg shadow-md hover:bg-primary transition"
+          class="cursor-pointer w-full py-2 bg-primary-second text-white font-semibold rounded-lg shadow-md hover:bg-primary-bg transition"
           @click="cadastrar()">
           Cadastrar-se
         </button>
@@ -57,10 +57,10 @@
 
 
     <!-- Coluna Esquerda -->
-    <div class="bg-primary-light text-white flex-col justify-center items-center p-10 text-center hidden md:flex">
+    <div class="bg-primary-second text-white flex-col justify-center items-center p-10 text-center hidden md:flex">
       <img src="../../assets/img/CasalFinanceiro2.png" class="w-[20em] md:w-[28em] lg:w-[35em] mb-6" alt="Imagem 1" />
-      <h2 class="text-2xl font-semibold">Olá, meu amigo!</h2>
-      <p class="mt-2 text-gray-200 max-w-md">
+      <h2 class="text-2xl font-semibold text-white">Olá, meu amigo!</h2>
+      <p class="mt-2 text-white max-w-md">
         Organize suas finanças de um jeito simples e sem dor de cabeça.
       </p>
     </div>

@@ -27,7 +27,7 @@ const inputId = computed(
     <!-- Label acima -->
     <label
       :for="inputId"
-      class="block text-sm font-medium text-neutral-gray mb-1"
+      class="block text-sm font-medium text-gray-500 mb-1"
     >
       {{ label }}
       <span v-if="required" class="text-red-500">*</span>
